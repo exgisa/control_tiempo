@@ -103,45 +103,36 @@ fechasU = sorted(df['FECHA'].unique())
 conductoresU = sorted(df['CONDUCTOR'].unique())
 horas_inicioU = sorted(df['INICIO'].unique())
 
-if st.button('Borrar Filtros'):
-    optionRuta = "Todas"
-    optionVehiculo = "Todos"
-    optionEstado = "Todos"
-    optionFecha = "Todas"
-    optionConductor = "Todos"
-    optionHoraInicio = "Todas"
-    optionHoraFin = "Todas"
-else:
 # Configurar las columnas y selectores
-    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
 
-    with col1:
-        rutasU.insert(0, "Todas")
-        optionRuta = st.selectbox('Ruta', (rutasU))
+with col1:
+    rutasU.insert(0, "Todas")
+    optionRuta = st.selectbox('Ruta', (rutasU))
 
-    with col2:
-        vehiculosU.insert(0, "Todos")
-        optionVehiculo = st.selectbox('Vehículo', (vehiculosU))
+with col2:
+    vehiculosU.insert(0, "Todos")
+    optionVehiculo = st.selectbox('Vehículo', (vehiculosU))
 
-    with col3:
-        estadosU.insert(0, "Todos")
-        optionEstado = st.selectbox('Estado', (estadosU))
+with col3:
+    estadosU.insert(0, "Todos")
+    optionEstado = st.selectbox('Estado', (estadosU))
 
-    with col4:
-        fechasU.insert(0,"Todas")
-        optionFecha = st.selectbox('Fecha', (fechasU))
+with col4:
+    fechasU.insert(0,"Todas")
+    optionFecha = st.selectbox('Fecha', (fechasU))
 
-    with col5:
-        conductoresU.insert(0,"Todos")
-        optionConductor = st.selectbox('Conductor', (conductoresU))     
+with col5:
+    conductoresU.insert(0,"Todos")
+    optionConductor = st.selectbox('Conductor', (conductoresU))     
 
-    with col6:
-        horas_inicioU.insert(0, "Todas")
-        optionHoraInicio = st.selectbox('Hora inicio', horas_inicioU)
+with col6:
+    horas_inicioU.insert(0, "Todas")
+    optionHoraInicio = st.selectbox('Hora inicio', horas_inicioU)
 
-    with col7:
-        horas_inicioU.insert(0, "Todas")
-        optionHoraFin = st.selectbox('Hora fin', horas_inicioU)
+with col7:
+    horas_inicioU.insert(0, "Todas")
+    optionHoraFin = st.selectbox('Hora fin', horas_inicioU)
 
 # Filtrar los datos según las opciones seleccionadas
 filtered_data = df
