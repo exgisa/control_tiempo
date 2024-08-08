@@ -74,12 +74,7 @@ df['FECHA'] = pd.to_datetime(df['FECHA'], format='%d/%m/%Y', errors='coerce')
 # Filtrar las filas con fechas no convertibles
 df = df.dropna(subset=['FECHA'])
 
-df['CONTROL'] = df['CONTROL'].replace({'C1': 'Comfama'})
-df['CONTROL'] = df['CONTROL'].replace({'C2': 'Haceb'})
-df['CONTROL'] = df['CONTROL'].replace({'C3': 'HomeCenter'})
-df['CONTROL'] = df['CONTROL'].replace({'C4': 'Terminal Tte.'})
-df['CONTROL'] = df['CONTROL'].replace({'C5': 'Cotrafa'})
-df['CONTROL'] = df['CONTROL'].replace({'C6': 'Villanueva'})
+df['CONTROL'] = df['CONTROL'].replace({'C1': 'Comfama','C2': 'Haceb','C3': 'HomeCenter','C4': 'Terminal Tte.','C5': 'Cotrafa','C6': 'Villanueva'})
 
 # Obtener las opciones únicas de cada filtro
 rutasU = sorted(df['RUTA'].unique())

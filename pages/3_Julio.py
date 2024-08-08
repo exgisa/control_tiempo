@@ -86,9 +86,8 @@ df = df.dropna(subset=['FECHA'])
 
 df['CONTROL'] = df['CONTROL'].replace({'C1': 'Comfama','C2': 'Haceb','C3': 'HomeCenter','C4': 'Terminal Tte.','C5': 'Cotrafa','C6': 'Villanueva'})
 
-# replacements = {str(i): f'B{i:03}' for i in range(1, 58)}
-# # df['VEHICULO'] = df['VEHICULO'].astype(str).replace({'1': 'B001'})
-# df['VEHICULO'] = df['VEHICULO'].replace(replacements)
+# Convertir la columna 'INICIO' a datetime
+#df['INICIO'] = pd.to_datetime(df['INICIO'], format='%H:%M', errors='coerce').dt.time
 
 # Crear un diccionario con las correspondencias
 nro_interno = {str(i): f'B{i:03}' for i in range(1, 58)}
@@ -102,9 +101,12 @@ vehiculosU = sorted(df['VEHICULO'].unique())
 estadosU = sorted(df['ESTADO'].unique())
 fechasU = sorted(df['FECHA'].unique())
 conductoresU = sorted(df['CONDUCTOR'].unique())
+hora_inicio = sorted(df['INICIO'].unique())
+hora_fin = sorted(df['INICIO'].unique()) 
+horas_inicioU = sorted(df['INICIO'].unique())
 
 # Configurar las columnas y selectores
-col1, col2, col3, col4, col5, = st.columns(5)
+col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
 
 with col1:
     rutasU.insert(0, "Todas")
@@ -124,7 +126,15 @@ with col4:
 
 with col5:
     conductoresU.insert(0,"Todos")
-    optionConductor = st.selectbox('Conductor', (conductoresU))       
+    optionConductor = st.selectbox('Conductor', (conductoresU))     
+
+with col6:
+    horas_inicioU.insert(0, "Todos")
+    hora_inicio = st.selectbox('Hora inicio', hora_inicio)
+
+with col7:
+    horas_inicioU.insert(0, "Todos")
+    hora_fin = st.selectbox('Hora fin', hora_fin)
 
 # Filtrar los datos según las opciones seleccionadas
 filtered_data = df
@@ -141,7 +151,13 @@ if optionFecha != "Todos":
     filtered_data = filtered_data[filtered_data['FECHA'] == optionFecha]
 
 if optionConductor != "Todos":
-    filtered_data = filtered_data[filtered_data['CONDUCTOR'] == optionConductor]        
+    filtered_data = filtered_data[filtered_data['CONDUCTOR'] == optionConductor]     
+
+# Filtrar los datos según el rango de horas
+if hora_inicio != "Todos":
+    filtered_data = filtered_data[
+    (filtered_data['INICIO'] >= hora_inicio) & (filtered_data['INICIO'] <= hora_fin)
+]
 
 # Crear un gráfico de barras para la cantidad de registros por ESTADO
 registros_por_estado = filtered_data['ESTADO'].value_counts().reset_index()
