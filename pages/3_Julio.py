@@ -101,40 +101,47 @@ vehiculosU = sorted(df['VEHICULO'].unique())
 estadosU = sorted(df['ESTADO'].unique())
 fechasU = sorted(df['FECHA'].unique())
 conductoresU = sorted(df['CONDUCTOR'].unique())
-hora_inicio = sorted(df['INICIO'].unique())
-hora_fin = sorted(df['INICIO'].unique()) 
 horas_inicioU = sorted(df['INICIO'].unique())
 
+if st.button('Borrar Filtros'):
+    optionRuta = "Todas"
+    optionVehiculo = "Todos"
+    optionEstado = "Todos"
+    optionFecha = "Todas"
+    optionConductor = "Todos"
+    optionHoraInicio = "Todas"
+    optionHoraFin = "Todas"
+else:
 # Configurar las columnas y selectores
-col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
+    col1, col2, col3, col4, col5, col6, col7 = st.columns(7)
 
-with col1:
-    rutasU.insert(0, "Todas")
-    optionRuta = st.selectbox('Ruta', (rutasU))
+    with col1:
+        rutasU.insert(0, "Todas")
+        optionRuta = st.selectbox('Ruta', (rutasU))
 
-with col2:
-    vehiculosU.insert(0, "Todos")
-    optionVehiculo = st.selectbox('Vehículo', (vehiculosU))
+    with col2:
+        vehiculosU.insert(0, "Todos")
+        optionVehiculo = st.selectbox('Vehículo', (vehiculosU))
 
-with col3:
-    estadosU.insert(0, "Todos")
-    optionEstado = st.selectbox('Estado', (estadosU))
+    with col3:
+        estadosU.insert(0, "Todos")
+        optionEstado = st.selectbox('Estado', (estadosU))
 
-with col4:
-    fechasU.insert(0,"Todos")
-    optionFecha = st.selectbox('Fecha', (fechasU))
+    with col4:
+        fechasU.insert(0,"Todas")
+        optionFecha = st.selectbox('Fecha', (fechasU))
 
-with col5:
-    conductoresU.insert(0,"Todos")
-    optionConductor = st.selectbox('Conductor', (conductoresU))     
+    with col5:
+        conductoresU.insert(0,"Todos")
+        optionConductor = st.selectbox('Conductor', (conductoresU))     
 
-with col6:
-    horas_inicioU.insert(0, "Todos")
-    hora_inicio = st.selectbox('Hora inicio', horas_inicioU)
+    with col6:
+        horas_inicioU.insert(0, "Todas")
+        optionHoraInicio = st.selectbox('Hora inicio', horas_inicioU)
 
-with col7:
-    horas_inicioU.insert(0, "Todos")
-    hora_fin = st.selectbox('Hora fin', horas_inicioU)
+    with col7:
+        horas_inicioU.insert(0, "Todas")
+        optionHoraFin = st.selectbox('Hora fin', horas_inicioU)
 
 # Filtrar los datos según las opciones seleccionadas
 filtered_data = df
@@ -147,7 +154,7 @@ if optionVehiculo != "Todos":
 if optionEstado != "Todos":
     filtered_data = filtered_data[filtered_data['ESTADO'] == optionEstado]
 
-if optionFecha != "Todos":
+if optionFecha != "Todas":
     filtered_data = filtered_data[filtered_data['FECHA'] == optionFecha]
 
 if optionConductor != "Todos":
@@ -160,9 +167,9 @@ if optionConductor != "Todos":
 #     filtered_data = filtered_data[(filtered_data['INICIO'] >= hora_inicio) & (filtered_data['INICIO'] <= hora_fin)]
 
 # Filtrar los datos según el rango de horas
-if hora_inicio != "Todos" and hora_fin != "Todos":
+if optionHoraInicio != "Todas" and optionHoraFin != "Todas":
     filtered_data = filtered_data[
-    (filtered_data['INICIO'] >= hora_inicio) & (filtered_data['INICIO'] <= hora_fin)
+    (filtered_data['INICIO'] >= optionHoraInicio) & (filtered_data['INICIO'] <= optionHoraFin)
 ]
 
 # Crear un gráfico de barras para la cantidad de registros por ESTADO
