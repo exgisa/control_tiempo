@@ -130,11 +130,11 @@ with col5:
 
 with col6:
     horas_inicioU.insert(0, "Todos")
-    hora_inicio = st.selectbox('Hora inicio', hora_inicio)
+    hora_inicio = st.selectbox('Hora inicio', horas_inicioU)
 
 with col7:
     horas_inicioU.insert(0, "Todos")
-    hora_fin = st.selectbox('Hora fin', hora_fin)
+    hora_fin = st.selectbox('Hora fin', horas_inicioU)
 
 # Filtrar los datos según las opciones seleccionadas
 filtered_data = df
@@ -153,8 +153,14 @@ if optionFecha != "Todos":
 if optionConductor != "Todos":
     filtered_data = filtered_data[filtered_data['CONDUCTOR'] == optionConductor]     
 
+# if hora_inicio != "Todos":
+#     filtered_data = filtered_data[filtered_data(filtered_data['INICIO'] >= hora_inicio) & (filtered_data['INICIO'] <= hora_fin)]
+
+# if hora_fin != "Todos":
+#     filtered_data = filtered_data[(filtered_data['INICIO'] >= hora_inicio) & (filtered_data['INICIO'] <= hora_fin)]
+
 # Filtrar los datos según el rango de horas
-if hora_inicio != "Todos":
+if hora_inicio != "Todos" and hora_fin != "Todos":
     filtered_data = filtered_data[
     (filtered_data['INICIO'] >= hora_inicio) & (filtered_data['INICIO'] <= hora_fin)
 ]
